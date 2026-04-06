@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Baby Shower · Mara Lucía Romero Idarraga</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Great+Vibes&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blush:     #f7c5d0;
+      --rose:      #e8879a;
+      --deep-rose: #c45d72;
+      --cream:     #fdf5f0;
+      --gold:      #d4a96a;
+      --soft-gold: #f0dfc0;
+      --text-dark: #4a2535;
+      --text-mid:  #4a2535;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text-dark);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO ─────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem 2rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, #fde8ee 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 80%, #fad0dd 0%, transparent 55%),
+        radial-gradient(ellipse at 60% 10%, #fff0f4 0%, transparent 40%);
+    }
+
+    /* floating petals */
+    .petal {
+      position: absolute;
+      border-radius: 50% 0 50% 0;
+      opacity: .18;
+      animation: drift linear infinite;
+    }
+    @keyframes drift {
+      0%   { transform: translateY(-60px) rotate(0deg);   opacity: .18; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0;   }
+    }
+
+    .hero-badge {
+      position: relative;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      color: var(--deep-rose);
+      letter-spacing: .12em;
+      margin-bottom: .5rem;
+      animation: fadeUp .9s ease both;
+    }
+
+    .hero h1 {
+      position: relative;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3rem, 10vw, 7rem);
+      color: var(--deep-rose);
+      line-height: 1.15;
+      animation: fadeUp 1s .2s ease both;
+    }
+
+    .hero-subtitle {
+      position: relative;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-style: italic;
+      color: var(--text-mid);
+      margin-top: .6rem;
+      letter-spacing: .06em;
+      animation: fadeUp 1s .4s ease both;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.6rem auto;
+      width: fit-content;
+      animation: fadeUp 1s .5s ease both;
+      position: relative;
+    }
+    .divider span { display: block; height: 1px; width: 80px; background: var(--gold); }
+    .divider svg  { width: 22px; fill: var(--gold); flex-shrink: 0; }
+
+    /* ─── PHOTO FRAME ──────────────────────────────────────── */
+    .photo-frame {
+      position: relative;
+      width: clamp(220px, 55vw, 340px);
+      aspect-ratio: 3/4;
+      margin: 0 auto 2rem;
+      animation: fadeUp 1s .6s ease both;
+    }
+    .photo-frame::before,
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      border: 1.5px solid var(--gold);
+      border-radius: 4px;
+    }
+    .photo-frame::before { inset: -10px; }
+    .photo-frame::after  { inset: -18px; opacity: .45; }
+
+    .photo-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      filter: saturate(1.05) brightness(1.02);
+    }
+
+    /* corner accents */
+    .corner {
+      position: absolute;
+      width: 24px; height: 24px;
+      border-color: var(--rose);
+      border-style: solid;
+      z-index: 2;
+    }
+    .corner.tl { top: -20px; left: -20px; border-width: 2px 0 0 2px; }
+    .corner.tr { top: -20px; right: -20px; border-width: 2px 2px 0 0; }
+    .corner.bl { bottom: -20px; left: -20px; border-width: 0 0 2px 2px; }
+    .corner.br { bottom: -20px; right: -20px; border-width: 0 2px 2px 0; }
+
+    /* ─── SECTIONS ─────────────────────────────────────────── */
+    .sections {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #f2dce4;
+      border-radius: 18px;
+      padding: 2.4rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 24px rgba(196,93,114,.08);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card.visible { opacity: 1; transform: translateY(0); }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blush), var(--rose), var(--gold));
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: .6rem;
+      display: block;
+    }
+
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+      color: var(--deep-rose);
+      margin-bottom: .8rem;
+    }
+    .card h2.script {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      color: var(--rose);
+    }
+
+    .card p {
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      line-height: 1.8;
+      color: var(--text-mid);
+      font-weight: 300;
+    }
+
+    .parents {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .parent-chip {
+      background: var(--soft-gold);
+      border: 1px solid var(--gold);
+      border-radius: 50px;
+      padding: .4rem 1.4rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--text-dark);
+      font-size: 1rem;
+    }
+
+    /* info grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+    .info-box {
+      background: linear-gradient(135deg, #fff5f7, #fde8ee);
+      border: 1px solid var(--blush);
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+    .info-box .label {
+      font-size: .8rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--rose);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      margin-bottom: .4rem;
+    }
+    .info-box .value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+    }
+
+    /* gift list */
+    .gift-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      margin-top: 1rem;
+    }
+    .gift-list li {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      font-size: 1.05rem;
+      color: var(--text-mid);
+    }
+    .gift-list li::before {
+      content: '♡';
+      color: var(--rose);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* confirm button */
+    .btn {
+      display: inline-block;
+      margin-top: 1.4rem;
+      padding: .8rem 2.4rem;
+      background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      letter-spacing: .06em;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(196,93,114,.35);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(196,93,114,.45); }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem 3rem;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: var(--rose);
+      opacity: .8;
+    }
+    footer small {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .85rem;
+      font-style: italic;
+      color: var(--text-mid);
+      margin-top: .4rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── FLOATING PETALS ── -->
+<script>
+  const petalColors = ['#f7c5d0','#fadadd','#e8879a','#f0dfc0'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const s = 10 + Math.random() * 28;
+    p.style.cssText = `
+      width:${s}px; height:${s}px;
+      background:${petalColors[Math.floor(Math.random()*petalColors.length)]};
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      animation-duration:${8+Math.random()*12}s;
+      animation-delay:-${Math.random()*12}s;
+    `;
+    document.body.appendChild(p);
+  }
+</script>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <p class="hero-badge">✦ Es una niña ✦</p>
+  <h1>Mara Lucía</h1>
+
+  <div class="divider">
+    <span></span>
+    <svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+    <span></span>
+  </div>
+
+  <div class="photo-frame">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <!-- 🌸 Reemplaza esta URL con la imagen real de tu repositorio de GitHub -->
+    <img
+      src="https://raw.githubusercontent.com/tu-usuario/tu-repositorio/main/baby-shower-foto.jpg"
+      alt="Foto del baby shower de Mara Lucía"
+      onerror="this.src='https://placehold.co/340x453/fde8ee/c45d72?text=Mara+Lucía+💕'"
+    />
+  </div>
+</section>
+
+<!-- ── CONTENT SECTIONS ── -->
+<div class="sections">
+
+  <!-- Bienvenida -->
+  <div class="card">
+    <span class="card-icon">🌸</span>
+    <h2 class="script">¡Estamos de fiesta!</h2>
+    <p>
+      Con el corazón lleno de alegría y emoción, queremos compartir con ustedes
+      la llegada de nuestra pequeña princesa. <strong>Mara Lucía</strong> está
+      a punto de iluminar nuestras vidas con su dulzura, y no podríamos imaginar
+      este momento tan especial sin la presencia de las personas mas importantes
+      en esta llegada.
+    </p>
+    <div class="parents">
+      <span class="parent-chip">💗 Mamá: Nayibe Andrea Avila </span>
+      <span class="parent-chip">👨‍👩‍👧 Papá: Maicol Steven Romero</span>
+    </div>
+  </div>
+
+  <!-- Invitación -->
+  <div class="card">
+    <span class="card-icon">💌</span>
+    <h2>Los invitamos a celebrar</h2>
+    <p>
+      Acompáñenos a dar la bienvenida y presentación de nuestra pequeña ángel 
+      que pronto llenará nuestra familia de risas, amor y momentos inolvidables. 
+      Su presencia será el mejor regalo que podamos recibir en este día tan especial.
+    </p>
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="label">📅 Fecha</div>
+        <div class="value">Sábado,<br/>25 de abril de 2025</div>
+      </div>
+      <div class="info-box">
+        <div class="label">🕐 Hora</div>
+        <div class="value">3:00 PM</div>
+        <div class="value">Importante Puntualidad</div>
+      </div>
+      <div class="info-box">
+        <div class="label">📍 Lugar</div>
+        <div class="value">Calle 19A # 116-31 - Bogotá<br/><a href="https://maps.app.goo.gl/Nt4sgbhe13RTF7CbA">Ubicación</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje especial -->
+  <div class="card">
+    <span class="card-icon">✨</span>
+    <h2>Un sueño hecho realidad</h2>
+    <p>
+      Cada latido suyo ha sido una promesa de amor. Mara Lucía viene a completar
+      nuestra familia y a recordarnos que los milagros más grandes llegan en los
+      paquetes más pequeños. Gracias por ser parte de este hermoso capítulo de
+      nuestra historia.
+    </p>
+  </div>
+
+  <!-- Lista de deseos -->
+  <div class="card">
+    <span class="card-icon">🎁</span>
+    <h2>Lista de deseos para Mara Lucía</h2>
+    <p>Si deseas hacerle un regalo a nuestra pequeña, aquí algunas ideas</p>
+    <ul class="gift-list">
+      <li>Ropita talla 0 – 3 meses y 3 – 6 meses</li>
+      <li>Pañales talla recién nacido o talla 1</li>
+      <li>Toallas y accesorios de baño suaves</li>
+      <li>Cremas y artículos de cuidado para bebé</li>
+      <li>Cobijitas y muselinas</li>
+      <li>Juguetes de estimulación temprana</li>
+      <p></p><p>Si en tu corazón deseas sorprendernos con un regalo especial, te pedimos confirmarlo con nosotros para asegurarnos de que no esté cubierto. 🎁💕</p>
+    </ul>
+  </div>
+
+  <!-- Confirmación -->
+  <div class="card" style="text-align:center;">
+    <span class="card-icon">📝</span>
+    <h2>Confirma tu asistencia</h2>
+    <p>
+      Por favor confírmanos tu asistencia antes del <strong>15 de Abril</strong>
+      para preparar todo con cariño para ti. ¡Queremos tenerte con nosotros!
+    </p>
+    <!-- Reemplaza el número con el real -->
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSc1z5oKMti9jwS2gAsXLNAuU2YaebXxL3Y6yPy0rtX1y2OXtg/viewform" target="_blank">
+      Clic para confirmar asistencia 🔗
+    </a>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  Con amor, Nayibe & Maicol
+  <small>Te esperamos con el corazón abierto 💕</small>
+</footer>
+
+<!-- scroll reveal -->
+<script>
+  const cards = document.querySelectorAll('.card');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: .15 });
+  cards.forEach(c => io.observe(c));
+</script>
+
+</body>
+</html>
